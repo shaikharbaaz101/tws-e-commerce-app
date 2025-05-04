@@ -24,40 +24,40 @@ pipeline {
             }
         }
 
-        stage('frontend build image') {
-            steps {
-                sh "docker build -t shaikharbaaz101/easyshopfrontend:${params.DOCKER_TAG} ."
-            }
-        }
+        // stage('frontend build image') {
+        //     steps {
+        //         sh "docker build -t shaikharbaaz101/easyshopfrontend:${params.DOCKER_TAG} ."
+        //     }
+        // }
 
-        stage('database migration build image') {
-            steps {
-                sh "docker build -t shaikharbaaz101/easyshopdbmigrate:${params.DOCKER_TAG} -f scripts/Dockerfile.migration ."
-            }
-        }
+        // stage('database migration build image') {
+        //     steps {
+        //         sh "docker build -t shaikharbaaz101/easyshopdbmigrate:${params.DOCKER_TAG} -f scripts/Dockerfile.migration ."
+        //     }
+        // }
 
-        stage('push frontend image') {
-            steps {
-                sh "docker push shaikharbaaz101/easyshopfrontend:${params.DOCKER_TAG}"
-            }
-        }
+        // stage('push frontend image') {
+        //     steps {
+        //         sh "docker push shaikharbaaz101/easyshopfrontend:${params.DOCKER_TAG}"
+        //     }
+        // }
 
-        stage('push database migration image') {
-            steps {
-                sh "docker push shaikharbaaz101/easyshopdbmigrate:${params.DOCKER_TAG}"
-            }
-        }
+        // stage('push database migration image') {
+        //     steps {
+        //         sh "docker push shaikharbaaz101/easyshopdbmigrate:${params.DOCKER_TAG}"
+        //     }
+        // }
 
         stage('updating frontend/dbmigrate manifest file with correct tag') {
             steps {     
-                withCredentials([usernamePassword(
-                    credentialsId: gitCredentials,
-                    usernameVariable: 'GIT_USERNAME',
-                    passwordVariable: 'GIT_PASSWORD'
-                )]) {
+                    withCredentials([usernamePassword(
+                        credentialsId: gitCredentials,
+                        usernameVariable: 'GIT_USERNAME',
+                        passwordVariable: 'GIT_PASSWORD'
+                    )]) {
                     // Configure Git
                     sh """
-                        git config user.name "${GIT_USERNAME}"
+                        git config user.name "shaikharbaaz101"
                         git config user.email "shaikharbaaz101@gmail.com"
                     """
                     
