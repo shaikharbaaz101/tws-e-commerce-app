@@ -80,6 +80,7 @@ pipeline {
                             
                             # Set up credentials for push
                             git remote set-url origin https://\${GIT_USERNAME}:\${GIT_PASSWORD}@github.com/shaikharbaaz101/tws-e-commerce-app.git
+                            git pull
                             git push origin HEAD:master
                         fi
                     """
