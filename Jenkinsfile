@@ -24,29 +24,29 @@ pipeline {
             }
         }
 
-        // stage('frontend build image') {
-        //     steps {
-        //         sh "docker build -t shaikharbaaz101/easyshopfrontend:${params.DOCKER_TAG} ."
-        //     }
-        // }
+        stage('frontend build image') {
+            steps {
+                sh "docker build -t shaikharbaaz101/easyshopfrontend:${params.DOCKER_TAG} ."
+            }
+        }
 
-        // stage('database migration build image') {
-        //     steps {
-        //         sh "docker build -t shaikharbaaz101/easyshopdbmigrate:${params.DOCKER_TAG} -f scripts/Dockerfile.migration ."
-        //     }
-        // }
+        stage('database migration build image') {
+            steps {
+                sh "docker build -t shaikharbaaz101/easyshopdbmigrate:${params.DOCKER_TAG} -f scripts/Dockerfile.migration ."
+            }
+        }
 
-        // stage('push frontend image') {
-        //     steps {
-        //         sh "docker push shaikharbaaz101/easyshopfrontend:${params.DOCKER_TAG}"
-        //     }
-        // }
+        stage('push frontend image') {
+            steps {
+                sh "docker push shaikharbaaz101/easyshopfrontend:${params.DOCKER_TAG}"
+            }
+        }
 
-        // stage('push database migration image') {
-        //     steps {
-        //         sh "docker push shaikharbaaz101/easyshopdbmigrate:${params.DOCKER_TAG}"
-        //     }
-        // }
+        stage('push database migration image') {
+            steps {
+                sh "docker push shaikharbaaz101/easyshopdbmigrate:${params.DOCKER_TAG}"
+            }
+        }
 
         stage('updating frontend/dbmigrate manifest file with correct tag') {
             steps {     
@@ -98,7 +98,7 @@ pipeline {
                         aws eks --region us-east-1 update-kubeconfig --name my-eks-cluster
         
                         # Apply the updated manifests
-                        kubectl get nodes
+                        kubectl apply -f kubernetes/*
                     """
                 }
             }
