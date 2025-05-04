@@ -11,7 +11,18 @@ pipeline {
             sh "ls -lat"
         }
     }
-    
+
+    stage('frontend build image') {
+        steps {
+            sh "docker build -t easyshopfrontend:${params.DOCKER_TAG} ."
+        }
+    }
+
+    stage('database migration build image') {
+        steps {
+            sh "docker build -t easyshopdbmigrate:${params.DOCKER_TAG} -f scripts/Dockerfile.migration ."
+        }
+    }
 
 
 
@@ -20,24 +31,6 @@ pipeline {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-//     stage('build image') {
-//         steps {
-//             sh "docker build -t nginxjenkins:${params.DOCKER_TAG} ."
-//         }
-//     }
 
 //     stage('stop existing image') {
 //         steps {
