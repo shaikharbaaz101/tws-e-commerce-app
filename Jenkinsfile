@@ -51,7 +51,7 @@ pipeline {
         stage('updating frontend/dbmigrate manifest file with correct tag') {
             steps {     
                     withCredentials([usernamePassword(
-                        credentialsId: gitCredentials,
+                        credentialsId: 'git-credentials',
                         usernameVariable: 'GIT_USERNAME',
                         passwordVariable: 'GIT_PASSWORD'
                     )]) {
