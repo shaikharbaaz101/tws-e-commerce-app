@@ -14,13 +14,13 @@ pipeline {
 
     stage('frontend build image') {
         steps {
-            sh "docker build -t easyshopfrontend:${params.DOCKER_TAG} ."
+            sh "docker build -t shaikharbaaz101/easyshopfrontend:${params.DOCKER_TAG} ."
         }
     }
 
     stage('database migration build image') {
         steps {
-            sh "docker build -t easyshopdbmigrate:${params.DOCKER_TAG} -f scripts/Dockerfile.migration ."
+            sh "docker build -t shaikharbaaz101/easyshopdbmigrate:${params.DOCKER_TAG} -f scripts/Dockerfile.migration ."
         }
     }
 
