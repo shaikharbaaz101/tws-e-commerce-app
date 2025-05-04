@@ -24,12 +24,17 @@ pipeline {
         }
     }
 
+    stage('push frontend image') {
+        steps {
+            sh "docker push shaikharbaaz101/easyshopfrontend:${params.DOCKER_TAG}"
+        }
+    }
 
-
-
-
-
-
+    stage('push database migration image') {
+        steps {
+            sh "docker push shaikharbaaz101/easyshopdbmigrate:${params.DOCKER_TAG}"
+        }
+    }
 
 
 //     stage('stop existing image') {
