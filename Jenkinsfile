@@ -99,7 +99,17 @@ pipeline {
                         aws eks --region us-east-1 update-kubeconfig --name my-eks-cluster
         
                         # Apply the updated manifests
-                        kubectl apply -f kubernetes/*
+                        kubectl apply -f kubernetes/01-namespace.yaml
+                        kubectl apply -f kubernetes/02-mongodb-pv.yaml
+                        kubectl apply -f kubernetes/03-mongodb-pvc.yaml
+                        kubectl apply -f kubernetes/04-configmap.yaml
+                        kubectl apply -f kubernetes/05-secrets.yaml
+                        kubectl apply -f kubernetes/06-mongodb-service.yaml
+                        kubectl apply -f kubernetes/07-mongodb-statefulset.yaml
+                        kubectl apply -f kubernetes/08-easyshop-deployment.yaml
+                        kubectl apply -f kubernetes/09-easyshop-service.yaml
+                        kubectl apply -f kubernetes/12-migration-job.yaml
+
                     """
                 }
             }
