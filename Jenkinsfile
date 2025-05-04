@@ -86,5 +86,22 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy to EKS') {
+            steps {
+                withCredentials([[
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: 'aws-eks-credentials'
+                ]]) {
+                    sh """
+                        # Set the Kubernetes context for EKS
+                        aws eks --region <your-region> update-kubeconfig --name <your-cluster-name>
+        
+                        # Apply the updated manifests
+                        kubectl get nodes
+                    """
+                }
+            }
+        }
     }
 }
