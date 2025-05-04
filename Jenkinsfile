@@ -95,7 +95,7 @@ pipeline {
                 ]]) {
                     sh """
                         # Set the Kubernetes context for EKS
-                        aws eks --region <your-region> update-kubeconfig --name <your-cluster-name>
+                        aws eks --region us-east-1 update-kubeconfig --name my-eks-cluster
         
                         # Apply the updated manifests
                         kubectl get nodes
