@@ -63,11 +63,11 @@ pipeline {
                     
                     sh """
                         # Update main application deployment
-                        sed -i "s|image: shaikharbaaz/easyshopfrontend:.*|image: shaikharbaaz101/easyshopfrontend:${params.DOCKER_TAG}|g" kubernetes/08-easyshop-deployment.yaml
+                        sed -i "s|image: shaikharbaaz/easyshopfrontend:*|image: shaikharbaaz101/easyshopfrontend:${params.DOCKER_TAG}|g" kubernetes/08-easyshop-deployment.yaml
                         
                         # Update migration job if it exists
                         if [ -f "kubernetes/12-migration-job.yaml" ]; then
-                            sed -i "s|image: shaikharbaaz/easyshopdbmigrate:.*|image: shaikharbaaz101/easyshopdbmigrate:${params.DOCKER_TAG}|g" kubernetes/12-migration-job.yaml
+                            sed -i "s|image: shaikharbaaz/easyshopdbmigrate:*|image: shaikharbaaz101/easyshopdbmigrate:${params.DOCKER_TAG}|g" kubernetes/12-migration-job.yaml
                         fi
                         
                         # Check for changes
